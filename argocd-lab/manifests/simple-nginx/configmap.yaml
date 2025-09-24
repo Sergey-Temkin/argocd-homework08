@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: simple-nginx-index             # ConfigMap name used by the Deployment volume
+  name: simple-nginx-index
   labels:
-    app: simple-nginx                  # App label to group resources
+    app: simple-nginx
 data:
-  index.html: |                        # The actual HTML page served by Nginx
+  index.html: |
     <!DOCTYPE html>
     <html>
       <head>
@@ -17,7 +17,7 @@ data:
         </style>
       </head>
       <body>
-        <h1>ArgoCD GitOps Demo — v1</h1>
-        <p class="ok">If you see this page, your Deployment, Service and ConfigMap are working.</p>
+        <h1>ArgoCD GitOps Demo — v2</h1>
+        <p class="ok">This is version v2. ArgoCD should show the app OutOfSync until we sync.</p>
       </body>
     </html>
