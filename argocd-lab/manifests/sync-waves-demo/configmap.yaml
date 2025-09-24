@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: waves-demo-config
+  annotations:
+    # Ensure this applies before the Deployment
+    argocd.argoproj.io/sync-wave: "0"
+data:
+  MESSAGE: "Hello from ConfigMap (wave 0)"

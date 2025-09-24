@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: waves-demo
+  labels:
+    app: waves-demo
+  annotations:
+    # Run after the ConfigMap
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: waves-demo
+  template:
+    metadata:
+      labels:
+        app: waves-demo
+    spec:
+      containers:
+        - name: alpine
+          image: alpine:3.20
+          command: ["/bin/sh","-c"]
+          args:
+            - 'echo "Container started, MESSAGE=$(MESSAGE)"; sleep 3600'
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: waves-demo-config
+                  key: MESSAGE

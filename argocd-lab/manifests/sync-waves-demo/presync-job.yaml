@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: presync-greet
+  annotations:
+    # Run before syncing other resources
+    argocd.argoproj.io/hook: PreSync
+    # Clean up after success so repeated syncs stay tidy
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: hello
+          image: busybox:1.36
+          command: ["/bin/sh","-c"]
+          args:
+            - 'echo "PreSync: preparing environment..." && sleep 2 && echo "PreSync: done."'
+  backoffLimit: 0

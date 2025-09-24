@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sync-waves-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Sergey-Temkin/argocd-homework08.git
+    targetRevision: HEAD
+    path: argocd-lab/manifests/sync-waves-demo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  # Keep manual so you can click SYNC and watch waves & hook order
+  syncPolicy: {}
