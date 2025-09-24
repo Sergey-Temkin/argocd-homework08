@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-nginx
+  labels:
+    app: simple-nginx                  # Same label ties resources together
+spec:
+  replicas: 1                          # Keep it small for minikube
+  selector:
+    matchLabels:
+      app: simple-nginx
+  template:
+    metadata:
+      labels:
+        app: simple-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine     # Small Nginx image
+          ports:
+            - containerPort: 80        # Default Nginx port
+          volumeMounts:
+            - name: web
+              mountPath: /usr/share/nginx/html   # Serve our ConfigMap content
+      volumes:
+        - name: web
+          configMap:
+            name: simple-nginx-index   # Mount the ConfigMap created above
+            items:
+              - key: index.html
+                path: index.html       # File will appear as /usr/share/nginx/html/index.html

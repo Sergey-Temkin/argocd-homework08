@@ -1,0 +1,7 @@
+# Python / Node / Editor junk we might not need for this repo
+__pycache__/
+*.pyc
+node_modules/
+.vscode/
+.idea/
+.DS_Store

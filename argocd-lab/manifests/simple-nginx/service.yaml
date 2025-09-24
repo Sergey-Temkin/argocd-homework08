@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-nginx
+  labels:
+    app: simple-nginx
+spec:
+  type: NodePort                       # NodePort so we can curl/browse via minikube service
+  selector:
+    app: simple-nginx
+  ports:
+    - name: http
+      port: 80                         # Service port
+      targetPort: 80                   # Pod's containerPort
+      nodePort: 30080                  # Fixed NodePort (optional); allows stable external access
