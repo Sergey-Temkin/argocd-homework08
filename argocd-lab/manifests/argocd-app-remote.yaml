@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: simple-nginx-remote
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Sergey-Temkin/argocd-homework08.git
+    targetRevision: HEAD
+    path: argocd-lab/manifests/simple-nginx-remote
+  destination:
+    name: argo-lab-2
+    namespace: default
+  syncPolicy: {}
